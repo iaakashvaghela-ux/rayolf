@@ -37,6 +37,7 @@
 
 /* Luxury Utilities */
 .text-gold { color: var(--luxury-gold); }
+.bg-luxury-gold { background-color: var(--luxury-gold); }
 .bg-cream { background-color: var(--luxury-cream); }
 .bg-luxury-black { background-color: var(--luxury-black); }
 
@@ -152,3 +153,13 @@
 .animate-zoom-out {
   animation: zoomOut 20s ease-out forwards;
 }
+
+/* Slider Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
