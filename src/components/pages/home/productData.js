@@ -1,0 +1,122 @@
+export const newCollectionProducts = [
+  {
+    id: "new-1",
+    category: "new",
+    name: "The Maharaja Jai Bandhgala (Green)",
+    price: 499.00,
+    image: "/images/products/green_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "new-2",
+    category: "new",
+    name: "Imperial Velvet Suiting (Maroon)",
+    price: 550.00,
+    image: "/images/products/maroon_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "new-3",
+    category: "new",
+    name: "Golden Brocade Sherwani",
+    price: 620.00,
+    image: "/images/products/green_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "new-4",
+    category: "new",
+    name: "Classic Silk & Vest Set",
+    price: 380.00,
+    image: "/images/products/maroon_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+];
+
+export const mensWearProducts = [
+  {
+    id: "men-1",
+    category: "men",
+    name: "Emerald Royal Bandhgala",
+    price: 540.00,
+    image: "/images/products/green_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Hand Finished", "Crafted in Jaipur"],
+  },
+  {
+    id: "men-2",
+    category: "men",
+    name: "Maroon Velvet Ceremony Suit",
+    price: 590.00,
+    image: "/images/products/maroon_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Premium Velvet", "Wedding Edit"],
+  },
+  {
+    id: "men-3",
+    category: "men",
+    name: "Jade Brocade Sherwani Set",
+    price: 680.00,
+    image: "/images/products/green_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Brocade Weave", "Festive Wear"],
+  },
+  {
+    id: "men-4",
+    category: "men",
+    name: "Wine Heritage Bandhgala",
+    price: 625.00,
+    image: "/images/products/maroon_sherwani.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    badges: ["Tailored Fit", "Reception Ready"],
+  },
+];
+
+export const womensWearProducts = [
+  {
+    id: "women-1",
+    category: "women",
+    name: "Vibrant Gota Patti Poshak (Yellow)",
+    price: 650.00,
+    image: "/images/products/women_yellow.jpg",
+    sizes: ["XS", "M", "XL", "XXL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "women-2",
+    category: "women",
+    name: "Rainbow Leheriya Saree Set",
+    price: 399.00,
+    image: "/images/products/women_rainbow.jpg",
+    sizes: ["S", "Free Size"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "women-3",
+    category: "women",
+    name: "Bandhani Silk-Net Suit (Pink & Green)",
+    price: 520.00,
+    image: "/images/products/women_pink_blue.jpg",
+    sizes: ["S", "M", "L", "XL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+  {
+    id: "women-4",
+    category: "women",
+    name: "Gota Work Lehenga Set (Fuschia)",
+    price: 780.00,
+    image: "/images/products/women_pink_green.jpg",
+    sizes: ["S", "M", "L", "XL"],
+    badges: ["Dry Clean Only", "Crafted in Jaipur"],
+  },
+];
+
+export const allProducts = [
+  ...newCollectionProducts,
+  ...mensWearProducts,
+  ...womensWearProducts,
+];

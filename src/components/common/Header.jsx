@@ -1,9 +1,13 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const desktopSearchInputRef = useRef(null)
+  const mobileSearchInputRef = useRef(null)
 
   // Prevent scroll when menu is open
   useEffect(() => {
@@ -16,6 +20,28 @@ export default function Header() {
       document.body.style.overflow = 'unset'
     }
   }, [isMenuOpen])
+
+  useEffect(() => {
+    if (isSearchOpen) {
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+      const activeInput = isDesktop ? desktopSearchInputRef.current : mobileSearchInputRef.current
+      activeInput?.focus()
+    }
+  }, [isSearchOpen])
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault()
+    const trimmedQuery = searchQuery.trim()
+
+    if (!trimmedQuery) {
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+      const activeInput = isDesktop ? desktopSearchInputRef.current : mobileSearchInputRef.current
+      activeInput?.focus()
+      return
+    }
+
+    setIsSearchOpen(false)
+  }
 
   const navLinks = [
     // { name: 'New Arrivals', href: '/new-arrivals' },
@@ -76,6 +102,52 @@ export default function Header() {
 
         {/* Actions Section - Right Aligned */}
         <div className="w-1/4 flex justify-end items-center gap-3 md:gap-6 xl:gap-8 text-[11px] tracking-[0.2em] uppercase font-medium">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="hidden lg:flex items-center justify-end"
+          >
+            <div className={`flex items-center overflow-hidden border border-white/10 bg-white/[0.06] transition-all duration-500 ease-out ${isSearchOpen ? 'w-[220px] xl:w-[280px] opacity-100 mr-2' : 'w-0 opacity-0 mr-0 border-transparent'}`}>
+              <input
+                ref={desktopSearchInputRef}
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') setIsSearchOpen(false)
+                }}
+                type="search"
+                placeholder="Search"
+                className="w-full bg-transparent px-4 py-2 text-[12px] tracking-[0.12em] text-white placeholder:text-white/35 outline-none"
+                aria-label="Search products"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen((current) => !current)}
+              className="flex items-center gap-2 group hover:text-[#c5a059] transition-all duration-300"
+              aria-label={isSearchOpen ? 'Close search' : 'Open search'}
+              aria-expanded={isSearchOpen}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#c5a059] transition-colors">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <span className="hidden xl:inline">Search</span>
+            </button>
+          </form>
+
+          <button
+            type="button"
+            onClick={() => setIsSearchOpen((current) => !current)}
+            className="lg:hidden p-1 text-white/80 hover:text-[#c5a059] transition-colors"
+            aria-label={isSearchOpen ? 'Close search' : 'Open search'}
+            aria-expanded={isSearchOpen}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+
           <Link href="/profile" className="flex items-center gap-2 group hover:text-[#c5a059] transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#c5a059] transition-colors">
               <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
@@ -102,6 +174,36 @@ export default function Header() {
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#c5a059] rounded-full lg:hidden"></span>
           </Link>
         </div>
+
+        <form
+          onSubmit={handleSearchSubmit}
+          className={`absolute left-4 right-4 top-full lg:hidden overflow-hidden border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-500 ease-out ${isSearchOpen ? 'translate-y-2 opacity-100 max-h-16' : '-translate-y-2 opacity-0 max-h-0 pointer-events-none'}`}
+        >
+          <div className="flex items-center">
+            <input
+              ref={mobileSearchInputRef}
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') setIsSearchOpen(false)
+              }}
+              type="search"
+              placeholder="Search products"
+              className="min-w-0 flex-1 bg-transparent px-4 py-3 text-[12px] tracking-[0.12em] text-white placeholder:text-white/35 outline-none"
+              aria-label="Search products"
+            />
+            <button
+              type="submit"
+              className="px-4 text-white/70 hover:text-[#c5a059] transition-colors"
+              aria-label="Submit search"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
       </div>
 
       {/* Premium Mobile Menu Drawer */}
